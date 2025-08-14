@@ -1,0 +1,26 @@
+{
+  "rakshana": {
+    "email": "rakshana.m2024aids@sece.ac.in",
+    "password": "$2b$12$kGjCywwsYF1qgyrh8dGn/.7cCrQBhRX7dZLwHwMk7jgsvnCmec796",
+    "created_at": "2025-08-13T19:24:25.974126",
+    "last_login": "2025-08-13T20:01:52.237759"
+  },
+  "shana": {
+    "email": "rakshana.maids@sece.ac.in",
+    "password": "$2b$12$P2NeN9ybs0h84dESvvkxX.mDda6AGLmgFr8JgpvaHatLhaYxBIBJK",
+    "created_at": "2025-08-13T19:28:22.977937",
+    "last_login": "2025-08-13T19:28:37.899011"
+  },
+  "rakshana.m": {
+    "email": "shanaram@gmail.com",
+    "password": "$2b$12$pFYrygHA0.I8oBur7tnczOc/j.Ux611Ob3Lem2kEFdYqE7OX7YIe6",
+    "created_at": "2025-08-13T20:09:44.838394",
+    "last_login": "2025-08-13T20:38:24.621809"
+  },
+  "ragavi": {
+    "email": "ragavipon@gmail.com",
+    "password": "$2b$12$/aeGyMaejZdeK.ETlxt1deH6q0Zn8v6kXf7tJy.ORvM5gy74Rlc2q",
+    "created_at": "2025-08-14T09:05:57.729272",
+    "last_login": "2025-08-14T09:06:15.411375"
+  }
+}
