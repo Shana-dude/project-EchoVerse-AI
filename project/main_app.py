@@ -14,6 +14,7 @@ from landing_page import show_landing_page
 from text_processor import TextProcessor
 from audio_pipeline import AudioPipeline
 from advanced_features import AdvancedFeatures
+from history_manager import HistoryManager
 
 
 # Configure Streamlit page
@@ -41,8 +42,8 @@ def show_sidebar():
             # Navigation menu with improved styling
             selected = option_menu(
                 "EchoVerse",
-                ["🏠 Home", "📝 Text Input", "🎛️ Generate", "📋 Results", "🔖 Bookmarks", "📦 Batch", "📊 Summary", "📚 Chapters"],
-                icons=['house', 'file-text', 'gear', 'list-task', 'bookmark', 'archive', 'bar-chart', 'book'],
+                ["🏠 Home", "📝 Text Input", "🎛️ Generate", "📋 Results", "📚 History", "🔖 Bookmarks", "📦 Batch", "📊 Summary", "📚 Chapters"],
+                icons=['house', 'file-text', 'gear', 'list-task', 'clock-history', 'bookmark', 'archive', 'bar-chart', 'book'],
                 menu_icon="headphones",
                 default_index=st.session_state.get('nav_index', 0),
                 styles={
@@ -55,7 +56,7 @@ def show_sidebar():
 
             # Store selected index
             if selected:
-                nav_options = ["🏠 Home", "📝 Text Input", "🎛️ Generate", "📋 Results", "🔖 Bookmarks", "📦 Batch", "📊 Summary", "📚 Chapters"]
+                nav_options = ["🏠 Home", "📝 Text Input", "🎛️ Generate", "📋 Results", "📚 History", "🔖 Bookmarks", "📦 Batch", "📊 Summary", "📚 Chapters"]
                 st.session_state.nav_index = nav_options.index(selected)
 
             # Logout button
@@ -75,6 +76,7 @@ def show_main_content(page):
     text_processor = TextProcessor()
     audio_pipeline = AudioPipeline()
     advanced_features = AdvancedFeatures()
+    history_manager = HistoryManager()
     
     if page == "🏠 Home":
         show_home_dashboard()
@@ -89,7 +91,10 @@ def show_main_content(page):
     
     elif page == "📋 Results":
         audio_pipeline.show_results_interface()
-    
+
+    elif page == "📚 History":
+        history_manager.show_history_interface()
+
     elif page == "🔖 Bookmarks":
         advanced_features.show_bookmarks_interface()
     
@@ -111,14 +116,26 @@ def show_home_dashboard():
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        st.metric("📚 Audiobooks Created", "0", delta="0")
-    
+        try:
+            history_stats = history_manager.get_history_stats()
+            st.metric("📚 Audiobooks Created", f"{history_stats['audiobooks']}", delta="0")
+        except:
+            st.metric("📚 Audiobooks Created", "0", delta="0")
+
     with col2:
-        st.metric("⏱️ Total Audio Time", "0 min", delta="0")
-    
+        try:
+            history_stats = history_manager.get_history_stats()
+            st.metric("🤖 AI Generations", f"{history_stats['topics']}", delta="0")
+        except:
+            st.metric("⏱️ Total Audio Time", "0 min", delta="0")
+
     with col3:
-        st.metric("📝 Words Processed", "0", delta="0")
-    
+        try:
+            history_stats = history_manager.get_history_stats()
+            st.metric("📚 Total History", f"{history_stats['total']}", delta="0")
+        except:
+            st.metric("📝 Words Processed", "0", delta="0")
+
     with col4:
         st.metric("🔖 Bookmarks", len(st.session_state.get('bookmarks', [])))
     

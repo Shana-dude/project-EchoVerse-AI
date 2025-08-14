@@ -348,6 +348,17 @@ AI processing in progress!"""
             st.markdown("---")
             self._show_audio_player()
 
+            # Add to history
+            try:
+                from history_manager import HistoryManager
+                history_manager = HistoryManager()
+                history_manager.add_generation_to_history(
+                    original_text, rewritten_text, tone, voice, language
+                )
+                st.info("💾 Generation saved to history!")
+            except Exception as e:
+                pass  # Don't break if history fails
+
             # Show generation summary
             st.markdown("---")
             self._show_generation_summary(rewritten_text, audio_data)

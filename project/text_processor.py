@@ -189,6 +189,17 @@ The mysterious object landed softly in the meadow behind her house, glowing with
                     self.original_text = result
                     st.success(f"✅ Generated {len(result.split())} words about '{topic}'!")
 
+                    # Add to history
+                    try:
+                        from history_manager import HistoryManager
+                        history_manager = HistoryManager()
+                        history_manager.add_topic_generation_to_history(
+                            topic, result, content_type.lower(), word_count
+                        )
+                        st.info("💾 Generation saved to history!")
+                    except Exception as e:
+                        pass  # Don't break if history fails
+
                     # Process the generated text
                     self._process_text()
 
